@@ -1,4 +1,4 @@
-// The dog constructor
+// The dog constructor.
 function Dog ( dogName ){
     this.name = 'mircea';
     this.addName = function(theName) {
@@ -10,11 +10,9 @@ function Dog ( dogName ){
     this.eat = eat;
     this.energy = 30;
     this.work = work;
-    this.energyColor = dogEnergyColor;
-    // this.timeFoodConsumption = timeFoodConsumption;
 };
 
-// Eat function
+// Eat function.
 function eat(meal) {
     if (this.energy < 100) {
         this.energy += meal[1];
@@ -24,19 +22,25 @@ function eat(meal) {
         dogStatus.html(this.name + " is full");
     }
     otputDogEnergy();
+    // start the counter if it is not already running.
+    if(counterCanStart) {
+        timeFoodConsumption(this);
+        //after starting the counter set it to false so it won't run twice.
+        counterCanStart = false;
+    }
 }
     
-// Le dog
+// Le dog.
 var leDog = new Dog();
 
-// The meals the dog can have
+// The meals the dog can have.
 var meals = {
     steak: ['steak', 30],
     milk: ["milk", 10],
     dogFood: ["dog food", 20]
 }
 
-// show the dog's energy level
+// show the dog's energy level.
 function otputDogEnergy() {
     $('#energy').html(leDog.energy);
 }
@@ -54,44 +58,41 @@ function work (position) {
     otputDogEnergy();
 }
 
-// Work positions available for the dog
+// Work positions available for the dog.
 var workPositions = {
     plumber: ["Plumber", 20],
     buildingConstructor: ["Building Constructor", 50]
 }
 
-// The dog's food consumption over time
+// The dog's food consumption over time.
 function timeFoodConsumption(dogName){
     countDown();
     // consumes the dog's energy untill it reaches 1 and the alerts you to feed it.
     function countDown() {
         if(dogName.energy > 1) {
-            dogName.energy -= 1;
+            $('.dog-energy').removeClass('critical');
+            dogName.energy -= 10;
             setTimeout(function(){
                 countDown();
-            },5000);
+            },1000);
             otputDogEnergy();
         }
         else {
             alert('Please feed the dog, it is starving');
-            $('dog-energy').addClass('critical');
+            $('.dog-energy').addClass('critical');
+            counterCanStart = true;
         }
     }
 }
 
-function dogEnergyColor () {
-    if (this.energy > 1) {
-        $('dog-energy').removeClass('critical');
-    }
-    else {
-        $('dog-energy').addClass('critical');
-    }
-}
+// check if the counter cand start(this can happen if it is not already running).
+// It is initially set to false because the counter is initialized on document.ready.
+var counterCanStart = false;
 
-// Run functions at a certain interval
+// Run functions at a certain interval.
 timeFoodConsumption(leDog);
 
-// the class of the element where to display what the dog is doing
+// the class of the element where to display what the dog is doing.
 var dogStatus;
 
 $(document).ready(function(){
