@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="actions">
+        <h2 class="dog-energy">The dog has an energy of <span id="energy"></span> %</h2>
+        <p class="dog-actions">dog status</p>
+    </div>
+    
+    <div class="actions">
+        <h3>Enter the dog's name</h3>
+        <input type="text" id="dog-name">
+    <input type="button" onclick="leDog.addName(document.getElementById('dog-name').value);leDog.showName()" value="create animal">
+    </div>
+    
+    <div class="actions">
+        <h3>Feed the dog</h3>
+        <input type="button" onclick="leDog.eat(meals.steak)" value="make dog eat steak">
+        <input type="button" onclick="leDog.eat(meals.milk)" value="make dog eat milk">
+        <input type="button" onclick="leDog.eat(meals.dogFood)" value="make dog eat dog food">
+    </div>
+    
+    <div class="actions">
+        <h3>Send the dog to work</h3>
+        <input type="button" onclick="leDog.work(workPositions.buildingConstructor)" value="work in building constructions">
+        <input type="button" onclick="leDog.work(workPositions.plumber)" value="work as a plumber">
+    </div>
+</body>
+
+</html>

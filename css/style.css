@@ -1,0 +1,21 @@
+body {
+	width: 100%;
+	padding: 30px;
+	box-sizing: border-box;
+}
+
+.actions {
+	width: 100%;
+	margin: 30px 0;
+	padding: 30px;
+	border: 1px solid #000;
+	box-sizing: border-box;
+}
+
+.dog-energy {
+	color: green;
+}
+
+.dog-energy.critical {
+	color: red;
+}
