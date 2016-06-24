@@ -65,16 +65,16 @@ var workPositions = {
 }
 
 // The dog's food consumption over time.
-function timeFoodConsumption(dogName, eatingQuantity, eatingTime){
+function timeFoodConsumption(dogName){
     countDown();
     // consumes the dog's energy untill it reaches 1 and the alerts you to feed it.
     function countDown() {
         if(dogName.energy > 1) {
             $('.dog-energy').removeClass('critical');
-            dogName.energy -= eatingQuantity;
+            dogName.energy -= 1;
             setTimeout(function(){
                 countDown();
-            }, eatingTime);
+            }, 5000);
             otputDogEnergy();
         }
         else {
@@ -90,7 +90,7 @@ function timeFoodConsumption(dogName, eatingQuantity, eatingTime){
 var counterCanStart = false;
 
 // Run functions at a certain interval.
-timeFoodConsumption(leDog, 1, 5000);
+timeFoodConsumption(leDog);
 
 // the class of the element where to display what the dog is doing.
 var dogStatus;
