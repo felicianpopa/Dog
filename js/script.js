@@ -14,12 +14,12 @@ function Dog ( dogName ){
 
 // Eat function.
 function eat(meal) {
-    if (this.energy < 100) {
+    if (this.energy + meal[1] < 100) {
         this.energy += meal[1];
         dogStatus.html(this.name + " is eating " + meal[0] + " and has " + this.energy + "% energy")
     }
     else {
-        dogStatus.html(this.name + " is full");
+        dogStatus.html(this.name + " is too full to eat this type of meal");
     }
     otputDogEnergy();
     // start the counter if it is not already running.
@@ -49,7 +49,6 @@ function otputDogEnergy() {
 function work (position) {
     if(this.energy > position[1]) {
         this.energy -= position[1];
-        console.log(position)
         dogStatus.html(this.name + " is working as a " + position[0] + " and has " + this.energy + "% energy left");
     }
     else {
@@ -66,11 +65,12 @@ var workPositions = {
 
 // The dog's food consumption over time.
 function timeFoodConsumption(dogName){
-    countDown();
+    setTimeout(function(){
+        countDown();
+    }, 5000);
     // consumes the dog's energy untill it reaches 1 and the alerts you to feed it.
     function countDown() {
         if(dogName.energy > 1) {
-            $('.dog-energy').removeClass('critical');
             dogName.energy -= 1;
             setTimeout(function(){
                 countDown();
@@ -79,9 +79,18 @@ function timeFoodConsumption(dogName){
         }
         else {
             alert('Please feed the dog, it is starving');
-            $('.dog-energy').addClass('critical');
             counterCanStart = true;
         }
+        checkDogEnergy(dogName);
+    }
+}
+
+function checkDogEnergy (dogName) {
+    if(dogName.energy < 10) {
+        $('.dog-energy').addClass('critical');
+    }
+    else {
+        $('.dog-energy').removeClass('critical');
     }
 }
 
@@ -92,17 +101,24 @@ var counterCanStart = false;
 // Run functions at a certain interval.
 timeFoodConsumption(leDog);
 
+
+
 // the class of the element where to display what the dog is doing.
 var dogStatus;
 
 $(document).ready(function(){
     otputDogEnergy();
+    otputDogBudget();
     dogStatus = $('.dog-actions');
 });
 
 
+// Add budget to the dog via prototypal inheritance.
+Dog.prototype.budget = 10;
 
-
+function otputDogBudget() {
+    $('#budget').html(leDog.budget);
+}
 
 
 
