@@ -14,14 +14,23 @@ function Dog ( dogName ){
 
 // Eat function.
 function eat(meal) {
-    if (this.energy + meal[1] < 100) {
-        this.energy += meal[1];
-        dogStatus.html(this.name + " is eating " + meal[0] + " and has " + this.energy + "% energy")
+    // if the dog does not have enough money to buy this type of food.
+    if (this.budget < meal[2]) {
+        dogStatus.html(this.name + " does not have enough money to eat this type of meal");
     }
+    // if the dog is not full and has enough money to buy the type of food.
+    else if (this.energy + meal[1] < 100 && this.budget > meal[2]) {
+        this.energy += meal[1];
+        this.budget -= meal[2]
+        dogStatus.html(this.name + " is eating " + meal[0] + " and has " + this.energy + "% energy. He spent " + meal[2] + " $ for this meal")
+    }
+
     else {
         dogStatus.html(this.name + " is too full to eat this type of meal");
     }
+    checkDogEnergy(this);
     otputDogEnergy();
+    otputDogBudget();
     // start the counter if it is not already running.
     if(counterCanStart) {
         timeFoodConsumption(this);
@@ -34,10 +43,11 @@ function eat(meal) {
 var leDog = new Dog();
 
 // The meals the dog can have.
+// The order is name of the food, energy value, cost.
 var meals = {
-    steak: ['steak', 30],
-    milk: ["milk", 10],
-    dogFood: ["dog food", 20]
+    steak: ['steak', 30, 20],
+    milk: ["milk", 10, 5],
+    dogFood: ["dog food", 20, 10]
 }
 
 // show the dog's energy level.
@@ -48,19 +58,26 @@ function otputDogEnergy() {
 // Make the dog work.
 function work (position) {
     if(this.energy > position[1]) {
+        // when working the dog consumes energy
         this.energy -= position[1];
-        dogStatus.html(this.name + " is working as a " + position[0] + " and has " + this.energy + "% energy left");
+        // working generates money
+        this.budget += position[2];
+
+        dogStatus.html(this.name + " is working as a " + position[0] + " and has " + this.energy + "% energy left. He also earned " + position[2] + " $");
     }
     else {
         dogStatus.html(this.name + " has not enough energy to do this job. Please feed him or find an easier job !");
     }
+    checkDogEnergy(this);
     otputDogEnergy();
+    otputDogBudget();
 }
 
 // Work positions available for the dog.
+// The order is position name, energy consumption, income.
 var workPositions = {
-    plumber: ["Plumber", 20],
-    buildingConstructor: ["Building Constructor", 50]
+    plumber: ["Plumber", 20, 30],
+    buildingConstructor: ["Building Constructor", 50, 100]
 }
 
 // The dog's food consumption over time.
@@ -85,6 +102,7 @@ function timeFoodConsumption(dogName){
     }
 }
 
+// if the dog has criticall energy add a class to the dog energy holder.
 function checkDogEnergy (dogName) {
     if(dogName.energy < 10) {
         $('.dog-energy').addClass('critical');
