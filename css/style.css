@@ -19,3 +19,7 @@ body {
 .dog-energy.critical {
 	color: red;
 }
+
+.dog-avatar img {
+	width: 320px;
+}

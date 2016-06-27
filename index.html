@@ -9,7 +9,9 @@
 </head>
 <body>
     <div class="actions">
-        <img src="img/shaking-tale.gif" alt="">
+        <div class="dog-avatar">
+            <img src="img/shaking-tale.gif" alt="">    
+        </div>
         <h2 class="dog-energy">The dog has an energy of <span id="energy"></span> %</h2>
         <h2 class="dog-budget">The dog has a budget of <span id="budget"></span> $</h2>
 
@@ -27,12 +29,16 @@
         <input type="button" onclick="leDog.eat(meals.steak)" value="make dog eat steak">
         <input type="button" onclick="leDog.eat(meals.milk)" value="make dog eat milk">
         <input type="button" onclick="leDog.eat(meals.dogFood)" value="make dog eat dog food">
+        <p>Meal name, energy percent, meal cost</p>
+        <div id="dog-meals"></div>
     </div>
     
     <div class="actions">
         <h3>Send the dog to work</h3>
         <input type="button" onclick="leDog.work(workPositions.buildingConstructor)" value="work in building constructions">
         <input type="button" onclick="leDog.work(workPositions.plumber)" value="work as a plumber">
+        <p>Function, energy consumption, income</p>
+        <div id="work-positions"></div>
     </div>
 </body>
 

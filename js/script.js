@@ -106,9 +106,11 @@ function timeFoodConsumption(dogName){
 function checkDogEnergy (dogName) {
     if(dogName.energy < 10) {
         $('.dog-energy').addClass('critical');
+        $('.dog-avatar img').attr("src", "img/hungry-dog.gif");
     }
     else {
         $('.dog-energy').removeClass('critical');
+        $('.dog-avatar img').attr("src", "img/shaking-tale.gif");
     }
 }
 
@@ -128,19 +130,34 @@ $(document).ready(function(){
     otputDogEnergy();
     otputDogBudget();
     dogStatus = $('.dog-actions');
+    showObjectsAttributes(workPositions, '#work-positions');
+    showObjectsAttributes(meals, '#dog-meals');
 });
 
 
 // Add budget to the dog via prototypal inheritance.
 Dog.prototype.budget = 10;
 
+// updates the heading showing the dog's budget.
 function otputDogBudget() {
     $('#budget').html(leDog.budget);
 }
 
-
-
-
+// Show the data from the literal objects eg food, work.
+function showObjectsAttributes(leObject, whereToShow) {
+    var text = "<ul>";
+    for(var key in leObject) {
+        text += "<li>";
+        text += "<strong>" + leObject[key][0] + "</strong> ";
+        for(i=1; i<leObject[key].length-1; i++) {
+            text += leObject[key][i] + ", ";
+        }
+        text += leObject[key][leObject[key].length-1];
+        text += "</li>"
+    }
+    text += "</ul>";
+    $(whereToShow).html(text);
+}
 
 
 //========================================================================================================
