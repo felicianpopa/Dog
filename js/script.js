@@ -1,11 +1,19 @@
 // Le dog.
 var leDog = new Dog();
 
+// the class of the element where to display what the dog is doing.
+var dogStatus;
+
 // Prompt for the dog's name
 $(document).ready(function(){
     leDog.name = prompt("please enter the dog's name");
     $('.dog-name').html(leDog.name);
     $('.overlay').hide();
+    otputDogEnergy();
+    otputDogBudget();
+    dogStatus = $('.dog-actions');
+    showObjectsAttributes(workPositions, '#work-positions');
+    showObjectsAttributes(meals, '#dog-meals');
 });
 
 // The dog constructor.
@@ -127,20 +135,6 @@ var counterCanStart = false;
 
 // Run functions at a certain interval.
 timeFoodConsumption(leDog);
-
-
-
-// the class of the element where to display what the dog is doing.
-var dogStatus;
-
-$(document).ready(function(){
-    otputDogEnergy();
-    otputDogBudget();
-    dogStatus = $('.dog-actions');
-    showObjectsAttributes(workPositions, '#work-positions');
-    showObjectsAttributes(meals, '#dog-meals');
-});
-
 
 // Add budget to the dog via prototypal inheritance.
 Dog.prototype.budget = 10;
