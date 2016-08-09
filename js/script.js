@@ -8,15 +8,14 @@ var dogStatus;
 $(document).ready(function(){
     leDog.name = prompt("please enter the dog's name");
     $('.dog-name').html(leDog.name);
-    $('.overlay').hide();
     otputDogEnergy();
     otputDogBudget();
     dogStatus = $('.dog-actions');
     showObjectsAttributes(workPositions, '#work-positions');
     showObjectsAttributes(meals, '#dog-meals');
-    // initialize the buttons for certain actions
     addButtonsForActions('meals', '#feed', 'eat');
     addButtonsForActions('workPositions', '#work', 'work');
+    $('.overlay').hide();
 });
 
 // The dog constructor.
@@ -162,7 +161,7 @@ function showObjectsAttributes(leObject, whereToShow) {
     $(whereToShow).html(text);
 }
 
-// initialize the buttons for certain actions
+// initialize the buttons for certain actions. All the parameters need to be added between "".
 function addButtonsForActions(objectName, whereToShow, actionName) {
     var realObject = eval(objectName);
     var text = "";
