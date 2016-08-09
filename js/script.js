@@ -8,13 +8,9 @@ $(document).ready(function(){
     $('.overlay').hide();
 });
 
-
 // The dog constructor.
 function Dog ( dogName ){
     this.name = 'mircea';
-    this.addName = function(theName) {
-        this.name = theName;
-    };
     this.showName = function() {
         dogStatus.html("your dog's name is " + this.name);
     };
@@ -55,7 +51,7 @@ function eat(meal) {
 // The meals the dog can have.
 // The order is name of the food, energy value, cost.
 var meals = {
-    steak: ['steak', 30, 20],
+    steak: ['steak', 40, 20],
     milk: ["milk", 10, 5],
     dogFood: ["dog food", 20, 10]
 }
