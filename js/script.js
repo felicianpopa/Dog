@@ -54,8 +54,6 @@ function eat(meal) {
     }
 }
     
-
-
 // The meals the dog can have.
 // The order is name of the food, energy value, cost.
 var meals = {
@@ -159,23 +157,3 @@ function showObjectsAttributes(leObject, whereToShow) {
     text += "</ul>";
     $(whereToShow).html(text);
 }
-
-
-//========================================================================================================
-// function makeDogEat(dogName) {
-//     console.log(dogName + " is eating");
-// }
-
-// var Dog = {
-//     name: "guest",
-//     askName: function(dogName) {
-//         this.name = dogName;
-//     },
-//     sayName: function() {
-//         console.log("Your dog's name is " + this.name)    
-//     },
-//     eat: function() {
-//         console.log(this.name + " is eating");
-//     }
-    
-// }
