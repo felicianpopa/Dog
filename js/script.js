@@ -14,6 +14,9 @@ $(document).ready(function(){
     dogStatus = $('.dog-actions');
     showObjectsAttributes(workPositions, '#work-positions');
     showObjectsAttributes(meals, '#dog-meals');
+    // initialize the buttons for certain actions
+    addButtonsForActions('meals', '#feed', 'eat');
+    addButtonsForActions('workPositions', '#work', 'work');
 });
 
 // The dog constructor.
@@ -29,6 +32,7 @@ function Dog ( dogName ){
 
 // Eat function.
 function eat(meal) {
+    console.log(this);
     // if the dog does not have enough money to buy this type of food.
     if (this.budget < meal[2]) {
         dogStatus.html(this.name + " does not have enough money to eat this type of meal");
@@ -59,7 +63,7 @@ function eat(meal) {
 var meals = {
     steak: ['steak', 40, 20],
     milk: ["milk", 10, 5],
-    dogFood: ["dog food", 20, 10]
+    dogfood: ["dog food", 20, 10]
 }
 
 // show the dog's energy level.
@@ -88,8 +92,8 @@ function work (position) {
 // Work positions available for the dog.
 // The order is position name, energy consumption, income.
 var workPositions = {
-    plumber: ["Plumber", 20, 30],
-    buildingConstructor: ["Building Constructor", 50, 100]
+    plumber: ["plumber", 20, 30],
+    buildingconstructor: ["building constructor", 50, 100]
 }
 
 // The dog's food consumption over time.
@@ -157,3 +161,19 @@ function showObjectsAttributes(leObject, whereToShow) {
     text += "</ul>";
     $(whereToShow).html(text);
 }
+
+// initialize the buttons for certain actions
+function addButtonsForActions(objectName, whereToShow, actionName) {
+    var realObject = eval(objectName);
+    var text = "";
+    for(var key in realObject) {
+        text += '<input type="button" onclick="leDog.' + actionName + '(' + objectName +'.'+removeSpaceFromString(realObject[key][0]) + ')' + '" value="'+ realObject[key][0] + '" </input>';
+    }
+    $(whereToShow).html(text);
+}
+
+// Remove ampty space from strings
+function removeSpaceFromString(str) {
+    return str.replace(/\s+/g, '')
+}
+
