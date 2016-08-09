@@ -1,3 +1,14 @@
+// Le dog.
+var leDog = new Dog();
+
+// Prompt for the dog's name
+$(document).ready(function(){
+    leDog.name = prompt("please enter the dog's name");
+    $('.dog-name').html(leDog.name);
+    $('.overlay').hide();
+});
+
+
 // The dog constructor.
 function Dog ( dogName ){
     this.name = 'mircea';
@@ -19,7 +30,7 @@ function eat(meal) {
         dogStatus.html(this.name + " does not have enough money to eat this type of meal");
     }
     // if the dog is not full and has enough money to buy the type of food.
-    else if (this.energy + meal[1] < 100 && this.budget > meal[2]) {
+    else if (this.energy + meal[1] < 100 && this.budget >= meal[2]) {
         this.energy += meal[1];
         this.budget -= meal[2]
         dogStatus.html(this.name + " is eating " + meal[0] + " and has " + this.energy + "% energy. He spent " + meal[2] + " $ for this meal")
@@ -39,8 +50,7 @@ function eat(meal) {
     }
 }
     
-// Le dog.
-var leDog = new Dog();
+
 
 // The meals the dog can have.
 // The order is name of the food, energy value, cost.
@@ -82,6 +92,7 @@ var workPositions = {
 
 // The dog's food consumption over time.
 function timeFoodConsumption(dogName){
+    // interval for the count down.
     setTimeout(function(){
         countDown();
     }, 5000);
